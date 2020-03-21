@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1018340987935",
+    "firebase_url": "https://atomchat-db5bf.firebaseio.com",
+    "project_id": "atomchat-db5bf",
+    "storage_bucket": "atomchat-db5bf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1018340987935:android:01e012b91ac99c692e712a",
+        "android_client_info": {
+          "package_name": "com.example.atomchat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1018340987935-eacnjbu8p1hrc3ibed6jh8jat3lnbe89.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.atomchat",
+            "certificate_hash": "51ca83049f0150b60110588f08089e1950f3e180"
+          }
+        },
+        {
+          "client_id": "1018340987935-6g4knveth57nlqsmjh75pnmqsjhcrjr3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZKoHXXxPV56tiwNCpyuz8FmQj0-I9DIE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1018340987935-6g4knveth57nlqsmjh75pnmqsjhcrjr3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
