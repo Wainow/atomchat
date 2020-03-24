@@ -81,7 +81,6 @@ public class General extends AppCompatActivity {
 
             }
         });
-        //Test
     }
 
 }

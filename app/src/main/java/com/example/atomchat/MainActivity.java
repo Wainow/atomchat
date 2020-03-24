@@ -28,11 +28,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void unitStart(){
         logoAnim = AnimationUtils.loadAnimation(this, R.anim.logo_anim);
-        ImageButton atom = (ImageButton) findViewById(R.id.atom);
+        ImageButton atom = findViewById(R.id.atom); //(ImageButton)
         atom.startAnimation(logoAnim);
 
-        log = (EditText) findViewById(R.id.edit_text_login);
-        pass = (EditText) findViewById(R.id.edit_text_password);
+        log = findViewById(R.id.edit_text_login); // (EditText)
+        pass = findViewById(R.id.edit_text_password); // (EditText)
         editTextAnim = AnimationUtils.loadAnimation(this, R.anim.edit_text_anim);
         editTextAnim2 = AnimationUtils.loadAnimation(this, R.anim.edit_text_anim2);
         log.startAnimation(editTextAnim);
@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void unitReg(){
         logoAnim_reg = AnimationUtils.loadAnimation(this, R.anim.logo_anim_reg);
-        ImageButton atom = (ImageButton) findViewById(R.id.atom);
+        ImageButton atom = findViewById(R.id.atom); // (ImageButton)
         atom.startAnimation(logoAnim_reg);
     }
 
