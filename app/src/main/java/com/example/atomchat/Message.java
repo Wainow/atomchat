@@ -5,9 +5,9 @@ public class Message {
     public String textMessage;
 
     public Message(){}
-    public Message(String userName, String textMessage){
+    public Message(String textMessage){
         this.textMessage = textMessage;
-        this.userName = userName;
+        //this.userName = userName;
     }
 
     public void setTextMessage(String textMessage) {
