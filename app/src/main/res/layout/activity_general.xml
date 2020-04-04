@@ -7,13 +7,6 @@
     tools:context=".General"
     android:background="@color/colorAccent">
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/text_message"
-        android:textColor="#FFFFFF"
-        />
-
     <ImageButton android:id="@+id/atom"
         android:layout_width="68dp"
         android:layout_height="60dp"
@@ -23,27 +16,40 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <EditText
-            android:id="@+id/edit_text_message"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:background="@color/colorPrimary"
-            android:hint="@string/edit_text_message"
-            android:textColorHint="#787878"
-            android:layout_alignParentBottom="true"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
-            android:textColor="#FFFFFF"/>
 
-        <ImageButton android:id="@+id/send_message_btn"
-            android:background="@drawable/ic_snd_message2"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginBottom="9dp"
-            android:layout_marginEnd="9dp"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginRight="9dp" />
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/list_of_messages"
+            />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:id="@+id/edit_text_message"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@color/colorPrimary"
+                android:hint="@string/edit_text_message"
+                android:textColorHint="#787878"
+                android:layout_alignParentBottom="true"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:textColor="#FFFFFF"/>
+
+            <ImageButton android:id="@+id/send_message_btn"
+                android:background="@drawable/ic_snd_message2"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginBottom="9dp"
+                android:layout_marginEnd="9dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginRight="9dp" />
+        </RelativeLayout>
+
     </RelativeLayout>
 
 </RelativeLayout>
