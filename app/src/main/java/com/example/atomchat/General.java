@@ -47,6 +47,9 @@ public class General extends AppCompatActivity {
     private EditText TextMessage;
     private ImageButton imageButtonMessage;
     private static int MAX_MESSAGE_LENGTH = 151;
+    private ArrayList<String> array_messages = new ArrayList<>();
+    private ListView list_of_messages;
+    private ArrayAdapter arrayAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,18 +58,57 @@ public class General extends AppCompatActivity {
         setTitle("#Swjat");
         //как и раньше: связываю существующие на окне окна для ввода текста с переменными
         editTextMessage = findViewById(R.id.edit_text_message);
-        TextMessage = findViewById(R.id.text_message);
+        list_of_messages = findViewById(R.id.list_of_messages);
         imageButtonMessage = findViewById(R.id.send_message_btn);
+
+        //инициализирую адаптер (тип данных для работы с listview), в аргументах конструктора: this - текущее активити, R.layout.row - ссылка на файл который я сверстал для работы с listview, array_messeges - массив сообщений
+        arrayAdapter = new ArrayAdapter<String>(this, R.layout.row, array_messages);
+        //говорю что listview - лист сообщений работает с этим адаптером
+        list_of_messages.setAdapter(arrayAdapter);
         //получаю данные о пользователе
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
         //получаю уникальные ключ данного пользователя (в данные момент это не используется)
         userID = user.getUid();
 
+        //слушатель изменений в базе данных
+        myRef.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                //помещаю изменения в базе в переменную типа string
+                String m = dataSnapshot.child("message").getValue().toString();
+                //добавляю в массив сообщений новое значение
+                array_messages.add(m);
+                //говорю адаптеру что нужно обновиться
+                arrayAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
         //слушатель нажатия на кнопку отправления
         imageButtonMessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 //записываю написанное в тексте в переменнюу
                 String message = editTextMessage.getText().toString();
                 //если введенные текст пустой или больше разрешённого посылаю пользователя
@@ -80,35 +122,6 @@ public class General extends AppCompatActivity {
                 //обнулить написанный текст после отправки
                 editTextMessage.setText("");
                 //слушатель вкладок (если в базе есть новые сообщения - он сработает)
-                myRef.addChildEventListener(new ChildEventListener() {
-                    @Override
-                    public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                        //записываю в переменную новое значение во вкладке message
-                        String m = dataSnapshot.child("message").getValue(String.class);
-                        //отображаю новое значение на окно
-                        TextMessage.setText(m);
-                    }
-
-                    @Override
-                    public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-                    }
-
-                    @Override
-                    public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
-                    }
-
-                    @Override
-                    public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
             }
         });
     }
