@@ -36,7 +36,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class General extends AppCompatActivity {
+    //инициализирую базу данных с той которая привязанна к приложению
     FirebaseDatabase database = FirebaseDatabase.getInstance();
+    //создаю переменную для работы с базой данных и говорю ей что все изменения будут происходить во вкладке 'users'
     DatabaseReference myRef = database.getReference("users");
 
     private FirebaseAuth mAuth;
@@ -44,7 +46,6 @@ public class General extends AppCompatActivity {
     private EditText editTextMessage;
     private EditText TextMessage;
     private ImageButton imageButtonMessage;
-    private ListView ListMessages;
     private static int MAX_MESSAGE_LENGTH = 151;
 
     @Override
@@ -52,47 +53,60 @@ public class General extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_general);
         setTitle("#Swjat");
-
+        //как и раньше: связываю существующие на окне окна для ввода текста с переменными
         editTextMessage = findViewById(R.id.edit_text_message);
         TextMessage = findViewById(R.id.text_message);
         imageButtonMessage = findViewById(R.id.send_message_btn);
-        //ListMessages = findViewById(R.id.list_of_messages);
+        //получаю данные о пользователе
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
-        //userID = getIntent().getExtras().get("userID").toString();
+        //получаю уникальные ключ данного пользователя (в данные момент это не используется)
         userID = user.getUid();
 
+        //слушатель нажатия на кнопку отправления
         imageButtonMessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //записываю написанное в тексте в переменнюу
                 String message = editTextMessage.getText().toString();
-
+                //если введенные текст пустой или больше разрешённого посылаю пользователя
                 if(message.equals("")){
                     return;
                 } else if(message.length() > MAX_MESSAGE_LENGTH){
                     return;
                 }
-
-                myRef.child(userID).child("message").setValue(message);
-
+                //говорю базе данных записать сообщение в - случайно сгенерированный в данном входе ключ - в этом ключе создать вкладку message - туда положить сообщение
+                myRef.push().child("message").setValue(message);
+                //обнулить написанный текст после отправки
                 editTextMessage.setText("");
-
-
-                //new code: here 'atomchat' is interrupted
-                myRef.child(userID).addValueEventListener(new ValueEventListener() {
+                //слушатель вкладок (если в базе есть новые сообщения - он сработает)
+                myRef.addChildEventListener(new ChildEventListener() {
                     @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        // This method is called once with the initial value and again
-                        // whenever data at this location is updated.
-                        //String value = dataSnapshot.getValue(String.class);
-                        String m = dataSnapshot.child("message").getValue().toString();
-                        //Toast.makeText(General.this, m, Toast.LENGTH_LONG).show();
+                    public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                        //записываю в переменную новое значение во вкладке message
+                        String m = dataSnapshot.child("message").getValue(String.class);
+                        //отображаю новое значение на окно
                         TextMessage.setText(m);
                     }
 
                     @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                        // Failed to read value
+                    public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                    }
+
+                    @Override
+                    public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+                    }
+
+                    @Override
+                    public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
                     }
                 });
             }
