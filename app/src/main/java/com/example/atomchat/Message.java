@@ -1,28 +1,18 @@
 package com.example.atomchat;
 
 public class Message {
-    public String userName;
-    public String textMessage;
+    private String message;
 
     public Message(){}
-    public Message(String textMessage){
-        this.textMessage = textMessage;
-        //this.userName = userName;
+    public Message(String message){
+        this.message = message;
     }
 
     public void setTextMessage(String textMessage) {
-        this.textMessage = textMessage;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
+        this.message = textMessage;
     }
 
     public String getTextMessage() {
-        return textMessage;
-    }
-
-    public String getUserName() {
-        return userName;
+        return message;
     }
 }
