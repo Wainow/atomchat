@@ -3,6 +3,8 @@ package com.example.atomchat;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ActionBar;
 import android.media.Image;
@@ -16,6 +18,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,8 +51,8 @@ public class General extends AppCompatActivity {
     private ImageButton imageButtonMessage;
     private static int MAX_MESSAGE_LENGTH = 151;
     private ArrayList<String> array_messages = new ArrayList<>();
-    private ListView list_of_messages;
-    private ArrayAdapter arrayAdapter;
+    private RecyclerView list_of_messages;
+    private DataAdapter dataAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,10 +64,11 @@ public class General extends AppCompatActivity {
         list_of_messages = findViewById(R.id.list_of_messages);
         imageButtonMessage = findViewById(R.id.send_message_btn);
 
-        //инициализирую адаптер (тип данных для работы с listview), в аргументах конструктора: this - текущее активити, R.layout.row - ссылка на файл который я сверстал для работы с listview, array_messeges - массив сообщений
-        arrayAdapter = new ArrayAdapter<String>(this, R.layout.row, array_messages);
-        //говорю что listview - лист сообщений работает с этим адаптером
-        list_of_messages.setAdapter(arrayAdapter);
+
+        list_of_messages.setLayoutManager(new LinearLayoutManager(this));
+        dataAdapter = new DataAdapter(this, array_messages);
+        list_of_messages.setAdapter(dataAdapter);
+
         //получаю данные о пользователе
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
@@ -80,7 +84,8 @@ public class General extends AppCompatActivity {
                 //добавляю в массив сообщений новое значение
                 array_messages.add(m);
                 //говорю адаптеру что нужно обновиться
-                arrayAdapter.notifyDataSetChanged();
+                dataAdapter.notifyDataSetChanged();
+                list_of_messages.smoothScrollToPosition(array_messages.size());
             }
 
             @Override
