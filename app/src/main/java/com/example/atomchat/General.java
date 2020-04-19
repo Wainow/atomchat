@@ -36,6 +36,7 @@ import com.google.firebase.database.ValueEventListener;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class General extends AppCompatActivity {
@@ -50,7 +51,7 @@ public class General extends AppCompatActivity {
     private EditText TextMessage;
     private ImageButton imageButtonMessage;
     private static int MAX_MESSAGE_LENGTH = 151;
-    private ArrayList<String> array_messages = new ArrayList<>();
+    private ArrayList<Chat> array_messages = new ArrayList<>();
     private RecyclerView list_of_messages;
     private DataAdapter dataAdapter;
 
@@ -81,8 +82,14 @@ public class General extends AppCompatActivity {
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 //помещаю изменения в базе в переменную типа string
                 String m = dataSnapshot.child("message").getValue().toString();
+                String sender = dataSnapshot.child("sender").getValue().toString();
+                String receiver = dataSnapshot.child("sender").getValue().toString();
                 //добавляю в массив сообщений новое значение
-                array_messages.add(m);
+                //array_messages.add(m);
+
+                Chat chat = new Chat(sender,receiver,m);
+                array_messages.add(chat);
+
                 //говорю адаптеру что нужно обновиться
                 dataAdapter.notifyDataSetChanged();
                 list_of_messages.smoothScrollToPosition(array_messages.size());
@@ -123,12 +130,21 @@ public class General extends AppCompatActivity {
                     return;
                 }
                 //говорю базе данных записать сообщение в - случайно сгенерированный в данном входе ключ - в этом ключе создать вкладку message - туда положить сообщение
-                myRef.push().child("message").setValue(message);
+                sendMessage(userID, "Swjat", message);
                 //обнулить написанный текст после отправки
                 editTextMessage.setText("");
                 //слушатель вкладок (если в базе есть новые сообщения - он сработает)
             }
         });
+    }
+
+    private void sendMessage(String sender, String receiver, String message){
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("sender", sender);
+        hashMap.put("receiver", receiver);
+        hashMap.put("message", message);
+
+        myRef.push().setValue(hashMap);
     }
 
 }
