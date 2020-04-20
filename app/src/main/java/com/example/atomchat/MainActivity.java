@@ -10,6 +10,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -22,8 +23,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     //создаю приватные переменные для "окна" в котором будет вводится логин и пароль
     private EditText log, pass;
+    private ImageButton incognito_button;
     //создаю приватные переменные для анимаций которые включаются при входе в программу
-    private Animation logoAnim, logoAnim_reg, editTextAnim, editTextAnim2;
+    private Animation logoAnim, logoAnim_reg, editTextAnim, editTextAnim2, incognitoAnim;
     //создаю приватные переменные в которой хранятся данные текущего пользователя
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -37,12 +39,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //говорю о том чтобы окно где пишутся логин и пароль предлежат этим переменным
         log = findViewById(R.id.edit_text_login); // (EditText)
         pass = findViewById(R.id.edit_text_password); // (EditText)
+        incognito_button = findViewById(R.id.incognito_button);
         //инициализирую анимации
         editTextAnim = AnimationUtils.loadAnimation(this, R.anim.edit_text_anim);
         editTextAnim2 = AnimationUtils.loadAnimation(this, R.anim.edit_text_anim2);
+        incognitoAnim = AnimationUtils.loadAnimation(this, R.anim.incognito_button_anim);
         //запускаю анимации
         log.startAnimation(editTextAnim);
         pass.startAnimation(editTextAnim2);
+        incognito_button.startAnimation(incognitoAnim);
     }
 
     //В этом методе тоже самое для анимации атома при нажатии на него
@@ -116,5 +121,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
         });
+    }
+
+    public void incognito_onClick(View view) {
+        unitReg();
+        singing("guest@mail.ru", "123123");
     }
 }
