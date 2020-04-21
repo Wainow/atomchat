@@ -3,4 +3,11 @@
     <string name="edit_text_message">Message</string>
     <string name="edit_text_login">login</string>
     <string name="edit_text_password">password</string>
+    <string name="about_text">
+    У лукоморья дуб зелёный;\n
+    Златая цепь на дубе том:\n
+    И днём и ночью <b>кот учёный</b>\n
+    Всё ходит по цепи кругом;\n
+    Идёт <b>направо</b> - песнь заводит,\n
+    <b>Налево</b> - сказку говорит.</string>
 </resources>

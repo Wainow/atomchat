@@ -35,7 +35,11 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 
@@ -54,7 +58,6 @@ public class General extends AppCompatActivity {
     private ArrayList<Chat> array_messages = new ArrayList<>();
     private RecyclerView list_of_messages;
     private DataAdapter dataAdapter;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,10 +87,11 @@ public class General extends AppCompatActivity {
                 String m = dataSnapshot.child("message").getValue().toString();
                 String sender = dataSnapshot.child("sender").getValue().toString();
                 String receiver = dataSnapshot.child("sender").getValue().toString();
+                String d = dataSnapshot.child("date").getValue().toString();
                 //добавляю в массив сообщений новое значение
                 //array_messages.add(m);
 
-                Chat chat = new Chat(sender,receiver,m);
+                Chat chat = new Chat(sender,receiver,m, d);
                 array_messages.add(chat);
 
                 //говорю адаптеру что нужно обновиться
@@ -130,7 +134,7 @@ public class General extends AppCompatActivity {
                     return;
                 }
                 //говорю базе данных записать сообщение в - случайно сгенерированный в данном входе ключ - в этом ключе создать вкладку message - туда положить сообщение
-                sendMessage(userID, "Swjat", message);
+                sendMessage(userID, "Swjat", message, userDate());
                 //обнулить написанный текст после отправки
                 editTextMessage.setText("");
                 //слушатель вкладок (если в базе есть новые сообщения - он сработает)
@@ -138,13 +142,20 @@ public class General extends AppCompatActivity {
         });
     }
 
-    private void sendMessage(String sender, String receiver, String message){
+    private void sendMessage(String sender, String receiver, String message, String date){
         HashMap<String, Object> hashMap = new HashMap<>();
         hashMap.put("sender", sender);
         hashMap.put("receiver", receiver);
         hashMap.put("message", message);
+        hashMap.put("date", date);
 
         myRef.push().setValue(hashMap);
+    }
+
+    public String userDate(){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm aa");
+        String dateString = dateFormat.format(new Date()).toString();
+        return dateString;
     }
 
 }

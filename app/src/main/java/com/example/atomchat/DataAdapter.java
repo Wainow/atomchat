@@ -14,7 +14,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class DataAdapter extends RecyclerView.Adapter<ViewHolder> {
 
@@ -48,10 +53,10 @@ public class DataAdapter extends RecyclerView.Adapter<ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Chat chat = messages.get(position); //LaWhoyBh36hpFkhHqEd1pWRvoie2
         String userColor = userColor(chat.getSender());
-        Toast.makeText(inflater.getContext(), userColor, Toast.LENGTH_LONG).show();
+        //Toast.makeText(inflater.getContext(), userColor, Toast.LENGTH_LONG).show();
         holder.message.setText(chat.getMessage());
-        holder.message.getBackground().setColorFilter(new LightingColorFilter(Color.parseColor(userColor), Color.parseColor(userColor)));
-        //holder.message.setTextColor(Color.parseColor("0000FF"));
+        holder.background.getBackground().setColorFilter(new LightingColorFilter(Color.parseColor(userColor), Color.parseColor(userColor)));
+        holder.time.setText(chat.getDate());
     }
 
     @Override
@@ -69,7 +74,7 @@ public class DataAdapter extends RecyclerView.Adapter<ViewHolder> {
         }
     }
 
-    String userColor(String id) {
+    public String userColor(String id) {
         String color = "";
         String norm = "1234567890ABCDEFabcdef";
         int n = 0;

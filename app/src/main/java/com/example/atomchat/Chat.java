@@ -1,20 +1,32 @@
 package com.example.atomchat;
 
+import java.util.Date;
+
 public class Chat {
     private String sender;
     private String receiver;
     private String message;
+    private String date;
 
-    public Chat(String sender, String receiver, String message) {
+    public Chat(String sender, String receiver, String message, String date) {
         this.sender = sender;
         this.message = message;
         this.receiver = receiver;
+        this.date = date;
     }
 
     public Chat(){};
 
     public String getReceiver() {
         return receiver;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public String getMessage() {
