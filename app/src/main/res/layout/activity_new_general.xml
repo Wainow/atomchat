@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="55dp"
+        android:layout_height="wrap_content"
+        tools:context=".NewGeneral"
+        android:background="@color/colorAccent">
+
+        <ImageButton android:id="@+id/atom"
+            android:layout_width="68dp"
+            android:layout_height="60dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="110dp"
+            android:background="@mipmap/ic_launcher_foreground3" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="468dp"
+                android:layout_marginTop="58dp"
+                android:id="@+id/list_of_messages"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true">
+
+            <EditText
+                android:id="@+id/edit_text_message"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@color/colorPrimary"
+                android:hint="@string/edit_text_message"
+                android:textColorHint="#787878"
+                android:layout_alignParentBottom="true"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:textColor="#FFFFFF"/>
+
+            <ImageButton android:id="@+id/send_message_btn"
+                android:background="@drawable/ic_snd_message2"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginBottom="9dp"
+                android:layout_marginEnd="9dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginRight="9dp" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <include
+        layout="@layout/app_bar_new_general"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/nav_header_new_general"
+        app:menu="@menu/activity_new_general_drawer"
+        android:background="#0d0d0d"
+        app:itemTextColor="#FFFFFF"
+        app:itemIconTint="#f44336"/>
+</androidx.drawerlayout.widget.DrawerLayout>

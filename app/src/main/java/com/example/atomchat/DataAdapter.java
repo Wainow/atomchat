@@ -6,7 +6,6 @@ import android.graphics.LightingColorFilter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,12 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
 
 public class DataAdapter extends RecyclerView.Adapter<ViewHolder> {
 
@@ -75,6 +69,7 @@ public class DataAdapter extends RecyclerView.Adapter<ViewHolder> {
     }
 
     public String userColor(String id) {
+
         String color = "";
         String norm = "1234567890ABCDEFabcdef";
         int n = 0;
@@ -89,6 +84,52 @@ public class DataAdapter extends RecyclerView.Adapter<ViewHolder> {
         }
         while (n++ < 6) color = color + '0';
         color = "#" + color;
+        return color;
+    }
+
+    public static int hex2decimal(String s) {
+        String digits = "0123456789ABCDEF";
+        s = s.toUpperCase();
+        int val = 0;
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            int d = digits.indexOf(c);
+            val = 16*val + d;
+        }
+        return val;
+    }
+    String userColor(String id, ViewHolder holder) {
+        String color ="";
+        //String id = "#2903030000000000000000000000";
+        String norm = "1234567890ABCDEFabcdef";
+        int n = 0;
+        for (int i = 0; i < id.length() && n < 6; i++) {
+            for (int j = 0; j < 22; j++) {
+                if (id.charAt(i) == norm.charAt(j)) {
+                    if (j < 16) color = color + norm.charAt(j);
+                    else color = color + norm.charAt(j - 6);
+                    n++;
+                }
+            }
+        }
+        while (n++ < 6) color = color + '0';
+        color = "#" + color;
+        String r = "";
+        String g = "";
+        String b = "";
+        r = r + color.charAt(0) + color.charAt(1);
+        g = g + color.charAt(2) + color.charAt(3);
+        b = b + color.charAt(4) + color.charAt(5);
+        int red = hex2decimal(r);
+        int green = hex2decimal(g);
+        int blue = hex2decimal(b);
+        if (1 - (0.299 * red + 0.587 * green + 0.114 * blue) / 255 < 0.5) {
+            // светлый;
+        }
+        else{
+            // темный
+            holder.message.setTextColor(Color.parseColor("#FFFFFF"));
+        }
         return color;
     }
 }

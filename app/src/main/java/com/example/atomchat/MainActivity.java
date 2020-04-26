@@ -1,8 +1,5 @@
 package com.example.atomchat;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,8 +7,10 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -113,7 +112,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if(task.isSuccessful()) {
                     Toast.makeText(MainActivity.this, "Успешно", Toast.LENGTH_LONG).show();
                     // создаю переменную которая связывает текущее окно MainActivity со следующим - General
-                    Intent intent = new Intent(MainActivity.this, General.class);
+                    Intent intent = new Intent(MainActivity.this, NewGeneral.class);
                     //запускаю след окно
                     startActivity(intent);
                 } else{
