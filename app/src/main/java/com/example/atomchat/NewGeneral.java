@@ -104,7 +104,7 @@ public class NewGeneral extends AppCompatActivity {
                 //помещаю изменения в базе в переменную типа string
                 String m = dataSnapshot.child("message").getValue().toString();
                 String sender = dataSnapshot.child("sender").getValue().toString();
-                String receiver = dataSnapshot.child("sender").getValue().toString();
+                String receiver = dataSnapshot.child("receiver").getValue().toString();
                 String d = dataSnapshot.child("date").getValue().toString();
                 //добавляю в массив сообщений новое значение
                 //array_messages.add(m);

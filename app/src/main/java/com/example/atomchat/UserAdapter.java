@@ -1,6 +1,7 @@
 package com.example.atomchat;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,13 +12,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.firebase.auth.FirebaseUser;
-
 import java.util.ArrayList;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
-
-    private FirebaseUser user;
 
     ArrayList<User> users;
     LayoutInflater inflater;
@@ -36,11 +33,19 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        User user = users.get(position);
+        final User user = users.get(position);
         holder.username.setText(user.getUsername());
         //holder.username.getBackground().setColorFilter(new LightingColorFilter(Color.parseColor(user.getProfile_color()), Color.parseColor(user.getProfile_color())));
         holder.profile_image.setColorFilter(Color.parseColor(user.getProfile_color()));
         //holder.profile_image.getBackground().setColorFilter(new LightingColorFilter(Color.parseColor(user.getProfile_color()), Color.parseColor(user.getProfile_color())));
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(inflater.getContext(), General.class);
+                intent.putExtra("userid", user.getId());
+                inflater.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override

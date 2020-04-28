@@ -23,7 +23,9 @@
             android:name=".NewGeneral"
             android:label="@string/title_activity_new_general"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".General" />
+        <activity
+            android:name=".General"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

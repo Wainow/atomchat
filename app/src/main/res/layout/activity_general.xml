@@ -7,15 +7,50 @@
     tools:context=".General"
     android:background="@color/colorAccent">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
+            <ImageView
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:id="@+id/profile_image_general"
+                android:src="@mipmap/ic_launcher_foreground"
+                android:padding="50dp"
+                android:scaleType="centerCrop"
+                android:background="@drawable/ic_launcher_background"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="#FFFFFF"
+                android:textColor="#FFFFFF"
+                android:id="@+id/username"
+                android:layout_toRightOf="@id/profile_image_general"
+                android:layout_toEndOf="@id/profile_image_general"
+                android:layout_marginLeft="10dp"
+                android:layout_centerVertical="true"
+                android:padding="8dp"
+                android:textSize="15sp"/>
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
     <ImageButton android:id="@+id/atom"
         android:layout_width="68dp"
         android:layout_height="60dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="100dp"
         android:background="@mipmap/ic_launcher_foreground3" />
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="630dp"
+        android:layout_marginTop="57dp">
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
