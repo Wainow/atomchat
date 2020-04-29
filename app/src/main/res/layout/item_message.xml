@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="301dp"
-    android:padding="7dp"
+    android:padding="3dp"
     android:layout_height="wrap_content">
         <LinearLayout
             android:layout_width="wrap_content"
@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:textSize="16dp"
             android:layout_marginLeft="5dp"
-            android:text="проверка на с     упердлинное сообщение"
+            android:text="проверка на cупердлинное сообщение проверка на cупердлинное сообщение"
             android:padding="5dp" />
         <TextView
             android:layout_width="wrap_content"

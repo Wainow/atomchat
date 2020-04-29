@@ -10,22 +10,26 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Chatting"
-            android:parentActivityName=".NewGeneral"
-            android:label="@string/title_activity_chatting"
+            android:name=".Search"
+            android:label="@string/title_activity_search"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".Chatting"
+            android:label="@string/title_activity_chatting"
+            android:parentActivityName=".NewGeneral"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Forum"
             android:label="@string/title_activity_forum"
             android:parentActivityName=".NewGeneral"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".NewGeneral"
             android:label="@string/title_activity_new_general"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".General"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
