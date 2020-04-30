@@ -50,6 +50,7 @@ public class General extends AppCompatActivity {
     private RecyclerView list_of_messages;
     private DataAdapter dataAdapter;
     private TextView status_text;
+    private ChildEventListener seenListener;
 
     Intent intent;
 
@@ -87,6 +88,7 @@ public class General extends AppCompatActivity {
         //получаю уникальные ключ данного пользователя (в данные момент это не используется)
         userID = user.getUid();
 
+        seenMessage(userID, userID_receiver);
         //слушатель изменений в базе данных
         myRef.addChildEventListener(new ChildEventListener() {
             @Override
@@ -96,10 +98,11 @@ public class General extends AppCompatActivity {
                 String sender = dataSnapshot.child("sender").getValue().toString();
                 String receiver = dataSnapshot.child("receiver").getValue().toString();
                 String d = dataSnapshot.child("date").getValue().toString();
+                String isseen = dataSnapshot.child("isseen").getValue().toString();
                 //добавляю в массив сообщений новое значение
                 //array_messages.add(m);
 
-                Chat chat = new Chat(sender,receiver,m, d);
+                Chat chat = new Chat(sender,receiver,m, d, isseen);
                 if(chat.getReceiver().equals(userID) && chat.getSender().equals(userID_receiver) || chat.getReceiver().equals(userID_receiver) && chat.getSender().equals(userID)) {
                     array_messages.add(chat);
                 }
@@ -157,6 +160,7 @@ public class General extends AppCompatActivity {
         hashMap.put("receiver", receiver);
         hashMap.put("message", message);
         hashMap.put("date", date);
+        hashMap.put("isseen", "false");
 
         myRef.push().setValue(hashMap);
     }
@@ -206,6 +210,7 @@ public class General extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+        myRef.removeEventListener(seenListener);
         status("offline");
     }
 
@@ -215,5 +220,46 @@ public class General extends AppCompatActivity {
         status("online");
     }
 
+    private void seenMessage(final String userID, final String userID_receiver){
+        seenListener = myRef.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                    String m = dataSnapshot.child("message").getValue().toString();
+                    String sender = dataSnapshot.child("sender").getValue().toString();
+                    String receiver = dataSnapshot.child("receiver").getValue().toString();
+                    String d = dataSnapshot.child("date").getValue().toString();
+                    String isseen = dataSnapshot.child("isseen").getValue().toString();
+
+                    Chat chat = new Chat(sender,receiver,m, d, isseen);
+
+                    if(chat.getReceiver().equals(userID) && chat.getSender().equals(userID_receiver)){
+                        HashMap<String, Object> hashMap = new HashMap<>();
+                        hashMap.put("isseen", "true");
+                        dataSnapshot.getRef().updateChildren(hashMap);
+                    }
+                    dataAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
 
 }

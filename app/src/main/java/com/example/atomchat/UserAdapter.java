@@ -114,10 +114,9 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
                 String sender = dataSnapshot.child("sender").getValue().toString();
                 String receiver = dataSnapshot.child("receiver").getValue().toString();
                 String d = dataSnapshot.child("date").getValue().toString();
-                //добавляю в массив сообщений новое значение
-                //array_messages.add(m);
+                String isseen = dataSnapshot.child("isseen").getValue().toString();
 
-                Chat chat = new Chat(sender,receiver,m, d);
+                Chat chat = new Chat(sender,receiver,m, d, isseen);
                 if(chat.getReceiver().equals(userID) && chat.getSender().equals(userID_receiver) || chat.getReceiver().equals(userID_receiver) && chat.getSender().equals(userID)) {
                     last_message.setText(m);
                     last_message.setTextColor(Color.parseColor(userColor(sender)));

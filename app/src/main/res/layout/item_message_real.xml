@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:id="@+id/relative_for_seen">
     <RelativeLayout
-    android:layout_width="300dp"
+    android:layout_width="320dp"
     android:layout_alignParentEnd="true"
     android:layout_alignParentRight="true"
     android:layout_height="wrap_content">
@@ -24,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="16dp"
                 android:layout_marginLeft="5dp"
-                android:text="1"
+                android:text="проверка на cупердлинноепроверка на cупердлинноепроверка на cупердлинноепроверка на cупердлинное"
                  android:padding="5dp"/>
             <TextView
                 android:layout_width="wrap_content"
@@ -33,6 +33,23 @@
                 android:text="10:20 AM"
                 android:padding="5dp"
                 android:textSize="10dp"/>
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/seen"
+                android:id="@+id/eye_seen"
+                android:scaleType="fitXY"
+                android:visibility="gone"
+                android:padding="5dp"
+                android:layout_marginTop="8dp"/>
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/not_seen"
+                android:scaleType="fitXY"
+                android:id="@+id/eye_not_seen"
+                android:padding="5dp"
+                android:layout_marginTop="8dp"/>
         </LinearLayout>
     </RelativeLayout>
 </RelativeLayout>

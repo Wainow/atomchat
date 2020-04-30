@@ -107,10 +107,11 @@ public class NewGeneral extends AppCompatActivity {
                 String sender = dataSnapshot.child("sender").getValue().toString();
                 String receiver = dataSnapshot.child("receiver").getValue().toString();
                 String d = dataSnapshot.child("date").getValue().toString();
+                String isseen = dataSnapshot.child("isseen").getValue().toString();
                 //добавляю в массив сообщений новое значение
                 //array_messages.add(m);
 
-                Chat chat = new Chat(sender,receiver,m, d);
+                Chat chat = new Chat(sender,receiver,m, d, isseen);
                 array_messages.add(chat);
 
                 //говорю адаптеру что нужно обновиться
@@ -181,6 +182,7 @@ public class NewGeneral extends AppCompatActivity {
         hashMap.put("receiver", receiver);
         hashMap.put("message", message);
         hashMap.put("date", date);
+        hashMap.put("isseen", "true");
 
         myRef.push().setValue(hashMap);
     }

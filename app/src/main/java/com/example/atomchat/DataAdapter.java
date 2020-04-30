@@ -51,6 +51,17 @@ public class DataAdapter extends RecyclerView.Adapter<ViewHolder> {
         holder.message.setText(chat.getMessage());
         holder.background.getBackground().setColorFilter(new LightingColorFilter(Color.parseColor(userColor), Color.parseColor(userColor)));
         holder.time.setText(chat.getDate());
+        if(chat.getIsseen().equals("false")){
+            //holder.relative_seen.setBackgroundColor(Color.parseColor("#161616"));
+            holder.eye_seen.setVisibility(View.GONE);
+            holder.eye_not_seen.setVisibility(View.VISIBLE);
+        } else if(chat.getIsseen().equals("true")){
+            holder.eye_seen.setVisibility(View.VISIBLE);
+            holder.eye_not_seen.setVisibility(View.GONE);
+        } else{
+            holder.eye_seen.setVisibility(View.GONE);
+            holder.eye_not_seen.setVisibility(View.GONE);
+        }
     }
 
     @Override
