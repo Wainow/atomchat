@@ -165,7 +165,7 @@ public class General extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if(id == android.R.id.home){
-            //startActivity(new Intent(Forum.this, NewGeneral.class));
+            //startActivity(new Intent(General.this, Chatting.class));
             finish();
             //overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         }

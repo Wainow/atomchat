@@ -1,12 +1,16 @@
 package com.example.atomchat;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.navigation.ui.AppBarConfiguration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,12 +27,16 @@ import java.util.ArrayList;
 public class Chatting extends AppCompatActivity {
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef = database.getReference("users_list");
+    DatabaseReference myRef = database.getReference("chatting");
+    DatabaseReference myRef_list = database.getReference("users_list");
 
     private FirebaseAuth mAuth;
     private ArrayList<User> array_users = new ArrayList<>();
+    private ArrayList<String> list_users = new ArrayList<>();
     private RecyclerView list_of_users;
     private UserAdapter userAdapter;
+    private static final String TAG = "myLogs";
+    private AppBarConfiguration mAppBarConfiguration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +45,20 @@ public class Chatting extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitle("#Chatting");
+
+        /** Trying to set Navigation Drawer Activity in this context*/
+        //DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        //NavigationView navigationView = findViewById(R.id.nav_view);
+        // Passing each menu ID as a set of Ids because each
+        // menu should be considered as top level destinations.
+        //mAppBarConfiguration = new AppBarConfiguration.Builder(
+        //        R.id.nav_home, R.id.nav_forum, R.id.nav_chatting)
+        //        .setDrawerLayout(drawer)
+        //        .build();
+        //NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        //NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
+        //NavigationUI.setupWithNavController(navigationView, navController);
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
@@ -50,8 +72,9 @@ public class Chatting extends AppCompatActivity {
         list_of_users.setLayoutManager(new LinearLayoutManager(this));
         userAdapter = new UserAdapter(this, array_users);
         list_of_users.setAdapter(userAdapter);
-        
+
         readUsers();
+        readChats();
     }
 
     private void readUsers() {
@@ -61,10 +84,16 @@ public class Chatting extends AppCompatActivity {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 //помещаю изменения в базе в переменную типа string
-                String id = dataSnapshot.child("id").getValue().toString();
-                User user = new User(id);
-                array_users.add(user);
-
+                String sender = dataSnapshot.child("sender").getValue().toString();
+                String receiver = dataSnapshot.child("receiver").getValue().toString();
+                if(sender.equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
+                    User user = new User(receiver);
+                    list_users.add(user.getId());
+                }
+                if(receiver.equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
+                    User user = new User(sender);
+                    list_users.add(user.getId());
+                }
                 //говорю адаптеру что нужно обновиться
                 userAdapter.notifyDataSetChanged();
             }
@@ -100,5 +129,57 @@ public class Chatting extends AppCompatActivity {
             overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void readChats() {
+        Log.d(TAG, "Метод включен...");
+        myRef_list.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                //array_users.clear();
+                String id1 = dataSnapshot.child("id").getValue().toString();
+                User user = new User(id1);
+                for(String id : list_users){
+                    if(user.getId().equals(id)){
+                        if(array_users.size() != 0){
+                            for(User userl : array_users){
+                                if(!user.getId().equals(userl.getId())){
+                                    array_users.add(user);
+                                }
+                            }
+                        } else{
+                            array_users.add(user);
+                        }
+                    }
+                }
+                userAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void plus_onClick(View view) {
+        Intent intent = new Intent(Chatting.this, Search.class);
+        //запускаю след окно
+        startActivity(intent);
     }
 }
