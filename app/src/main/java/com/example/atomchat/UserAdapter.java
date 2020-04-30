@@ -26,10 +26,16 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
     ArrayList<User> users;
     LayoutInflater inflater;
+    private boolean ischat;
 
-    public UserAdapter(Context context, ArrayList<User> users) {
+    public void setIschat(boolean ischat) {
+        this.ischat = ischat;
+    }
+
+    public UserAdapter(Context context, ArrayList<User> users, boolean ischat) {
         this.users = users;
         this.inflater = LayoutInflater.from(context);
+        this.ischat = ischat;
     }
 
     @NonNull
@@ -50,11 +56,25 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(inflater.getContext(), General.class);
+                intent.putExtra("userstatus", user.getStatus());
                 intent.putExtra("userid", user.getId());
                 inflater.getContext().startActivity(intent);
             }
         });
         setLastMessage(user.getId(), holder.last_message);
+
+        if(ischat){
+            if(user.getStatus().equals("online")){
+                holder.ic_online.setVisibility(View.VISIBLE);
+                holder.ic_offline.setVisibility(View.GONE);
+            } else{
+                holder.ic_online.setVisibility(View.GONE);
+                holder.ic_offline.setVisibility(View.GONE);
+            }
+        } else{
+            holder.ic_online.setVisibility(View.GONE);
+            holder.ic_offline.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -67,6 +87,9 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         public TextView username;
         public ImageView profile_image;
         public TextView last_message;
+        private ImageView ic_online;
+        private ImageView ic_offline;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -74,6 +97,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
             username = itemView.findViewById(R.id.username);
             profile_image = itemView.findViewById(R.id.profile_image);
             last_message = itemView.findViewById(R.id.last_message);
+            ic_online = itemView.findViewById(R.id.ic_online);
+            ic_offline = itemView.findViewById(R.id.ic_offline);
         }
     }
 

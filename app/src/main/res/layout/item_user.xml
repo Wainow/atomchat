@@ -37,5 +37,20 @@
         android:layout_marginLeft="10dp"
         android:padding="8dp"
         android:textSize="14sp"/>
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:id="@+id/ic_online"
+        android:visibility="gone"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/ic_online"/>
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:id="@+id/ic_offline"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/ic_offline"/>
 </RelativeLayout>
 </LinearLayout>

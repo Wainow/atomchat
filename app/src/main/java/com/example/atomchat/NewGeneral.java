@@ -40,6 +40,7 @@ public class NewGeneral extends AppCompatActivity {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     //создаю переменную для работы с базой данных и говорю ей что все изменения будут происходить во вкладке 'users'
     DatabaseReference myRef = database.getReference("users");
+    DatabaseReference myRef_list_user = database.getReference("users_list").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
 
     private FirebaseAuth mAuth;
     private String userID;
@@ -188,5 +189,23 @@ public class NewGeneral extends AppCompatActivity {
         SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm aa");
         String dateString = dateFormat.format(new Date()).toString();
         return dateString;
+    }
+
+    private void status(String status){
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("status", status);
+        myRef_list_user.updateChildren(hashMap);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        status("offline");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        status("online");
     }
 }

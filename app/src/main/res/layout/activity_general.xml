@@ -37,6 +37,16 @@
                 android:layout_centerVertical="true"
                 android:padding="8dp"
                 android:textSize="15sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="offline"
+                android:textColor="#808080"
+                android:id="@+id/status"
+                android:layout_toRightOf="@id/profile_image_general"
+                android:layout_toEndOf="@id/profile_image_general"
+                android:layout_centerVertical="true"
+                android:textSize="15sp"/>
         </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>

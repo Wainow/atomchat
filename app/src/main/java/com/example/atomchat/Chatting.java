@@ -23,12 +23,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Chatting extends AppCompatActivity {
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference("chatting");
     DatabaseReference myRef_list = database.getReference("users_list");
+    DatabaseReference myRef_list_user = database.getReference("users_list").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
 
     private FirebaseAuth mAuth;
     private ArrayList<User> array_users = new ArrayList<>();
@@ -70,8 +72,7 @@ public class Chatting extends AppCompatActivity {
 
         list_of_users = findViewById(R.id.list_of_users);
         list_of_users.setLayoutManager(new LinearLayoutManager(this));
-        userAdapter = new UserAdapter(this, array_users);
-        list_of_users.setAdapter(userAdapter);
+        userAdapter = new UserAdapter(this, array_users, true);
 
         readUsers();
         readChats();
@@ -87,13 +88,15 @@ public class Chatting extends AppCompatActivity {
                 String sender = dataSnapshot.child("sender").getValue().toString();
                 String receiver = dataSnapshot.child("receiver").getValue().toString();
                 if(sender.equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
-                    User user = new User(receiver);
-                    list_users.add(user.getId());
+                    //User user = new User(receiver);
+                    list_users.add(receiver);
                 }
                 if(receiver.equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
-                    User user = new User(sender);
-                    list_users.add(user.getId());
+                    //User user = new User(sender);
+                    list_users.add(sender);
                 }
+
+                list_of_users.setAdapter(userAdapter);
                 //говорю адаптеру что нужно обновиться
                 userAdapter.notifyDataSetChanged();
             }
@@ -138,7 +141,8 @@ public class Chatting extends AppCompatActivity {
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 //array_users.clear();
                 String id1 = dataSnapshot.child("id").getValue().toString();
-                User user = new User(id1);
+                String status = dataSnapshot.child("status").getValue().toString();
+                User user = new User(id1, status);
                 for(String id : list_users){
                     if(user.getId().equals(id)){
                         if(array_users.size() != 0){
@@ -181,5 +185,24 @@ public class Chatting extends AppCompatActivity {
         Intent intent = new Intent(Chatting.this, Search.class);
         //запускаю след окно
         startActivity(intent);
+    }
+
+    private void status(String status){
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("status", status);
+
+        myRef_list_user.updateChildren(hashMap);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        status("offline");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        status("online");
     }
 }

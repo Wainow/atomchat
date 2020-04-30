@@ -35,6 +35,8 @@ public class General extends AppCompatActivity {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     //создаю переменную для работы с базой данных и говорю ей что все изменения будут происходить во вкладке 'users'
     DatabaseReference myRef = database.getReference("chatting");
+    DatabaseReference myRef_list = database.getReference("users_list");
+    DatabaseReference myRef_list_user = database.getReference("users_list").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
 
     private FirebaseAuth mAuth;
     private String userID;
@@ -47,6 +49,7 @@ public class General extends AppCompatActivity {
     private ArrayList<Chat> array_messages = new ArrayList<>();
     private RecyclerView list_of_messages;
     private DataAdapter dataAdapter;
+    private TextView status_text;
 
     Intent intent;
 
@@ -66,9 +69,12 @@ public class General extends AppCompatActivity {
 
         profile_image = findViewById(R.id.profile_image_general);
         username = findViewById(R.id.username);
+        status_text = findViewById(R.id.status);
         intent = getIntent();
         final String userID_receiver = intent.getStringExtra("userid");
+        final String user_status = intent.getStringExtra("userstatus");
         username.setText(userColor(userID_receiver));
+        status_text.setText(user_status);
         profile_image.setColorFilter(Color.parseColor(userColor(userID_receiver)));
 
         list_of_messages.setLayoutManager(new LinearLayoutManager(this));
@@ -189,6 +195,24 @@ public class General extends AppCompatActivity {
         while (n++ < 6) color = color + '0';
         color = "#" + color;
         return color;
+    }
+
+    private void status(String status){
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("status", status);
+        myRef_list_user.updateChildren(hashMap);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        status("offline");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        status("online");
     }
 
 

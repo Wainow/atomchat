@@ -4,6 +4,7 @@ public class User {
     private String id;
     private String username;
     private String profile_color;
+    private String status;
 
     public String getId() {
         return id;
@@ -25,14 +26,23 @@ public class User {
         return profile_color;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public void setProfile_color(String profile_color) {
         this.profile_color = profile_color;
     }
 
-    public User(String id) {
+    public User(String id, String status) {
         this.id = id;
         this.username = userColor(id);
         this.profile_color = userColor(id);
+        this.status = status;
     }
 
     public String userColor(String id) {

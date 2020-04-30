@@ -40,7 +40,7 @@ public class Search extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         search_of_users = findViewById(R.id.search_of_users);
         search_of_users.setLayoutManager(new LinearLayoutManager(this));
-        userAdapter = new UserAdapter(this, array_users);
+        userAdapter = new UserAdapter(this, array_users, false);
         search_of_users.setAdapter(userAdapter);
 
         readUsers();
@@ -54,7 +54,8 @@ public class Search extends AppCompatActivity {
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 //помещаю изменения в базе в переменную типа string
                 String id = dataSnapshot.child("id").getValue().toString();
-                User user = new User(id);
+                String status = dataSnapshot.child("status").getValue().toString();
+                User user = new User(id, status);
                 if(!FirebaseAuth.getInstance().getCurrentUser().getUid().equals(user.getId())) {
                     array_users.add(user);
                 }
