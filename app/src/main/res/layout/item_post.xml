@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="100dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:background="@drawable/username_background">
+        <ImageView
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginTop="6dp"
+            android:id="@+id/post_image"
+            android:padding="50dp"
+            android:scaleType="centerCrop"
+            android:background="@drawable/ic_post_image"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="#FFFFFF"
+            android:textColor="#123FFF"
+            android:id="@+id/username_post"
+            android:layout_toRightOf="@id/post_image"
+            android:layout_toEndOf="@id/post_image"
+            android:layout_marginLeft="5dp"
+            android:padding="8dp"
+            android:textSize="15sp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="12:59 AM"
+            android:textColor="#808080"
+            android:id="@+id/data_post"
+            android:layout_toRightOf="@id/username_post"
+            android:layout_toEndOf="@id/username_post"
+            android:padding="2dp"
+            android:layout_marginTop="6dp"
+            android:textSize="15sp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="3"
+            android:id="@+id/text_post"
+            android:text="Hello everyone! This is a simple example of text post. Please be peaceful and make love!!! Hello everyone! This is a simple example of text post. Please be peaceful and make love!!! "
+            android:textColor="#FFFFFF"
+            android:layout_toRightOf="@id/post_image"
+            android:layout_toEndOf="@id/post_image"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="5dp"
+            android:padding="8dp"
+            android:textSize="14sp"/>
+    </RelativeLayout>
+</LinearLayout>

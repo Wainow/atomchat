@@ -10,6 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -51,6 +53,10 @@ public class NewGeneral extends AppCompatActivity {
     private ArrayList<Chat> array_messages = new ArrayList<>();
     private RecyclerView list_of_messages;
     private DataAdapter dataAdapter;
+    private static final int NOTIFY_ID = 101;
+    private static String CHANNEL_ID = "Message channel";
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -160,6 +166,8 @@ public class NewGeneral extends AppCompatActivity {
                 //слушатель вкладок (если в базе есть новые сообщения - он сработает)
             }
         });
+
+        checkNewMessages();
     }
 
     @Override
@@ -209,5 +217,18 @@ public class NewGeneral extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         status("online");
+    }
+
+    public void checkNewMessages(){
+        NotificationCompat.Builder builder =
+                new NotificationCompat.Builder(NewGeneral.this, CHANNEL_ID)
+                        .setSmallIcon(R.drawable.ic_launcher_foreground)
+                        .setContentTitle("Сообщение")
+                        .setContentText("соси мой жучий хуй")
+                        .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
+        NotificationManagerCompat notificationManager =
+                NotificationManagerCompat.from(NewGeneral.this);
+        notificationManager.notify(NOTIFY_ID, builder.build());
     }
 }

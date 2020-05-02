@@ -51,6 +51,8 @@ public class General extends AppCompatActivity {
     private DataAdapter dataAdapter;
     private TextView status_text;
     private ChildEventListener seenListener;
+    //public APIService apiService;
+    public boolean notify;
 
     Intent intent;
 
@@ -87,6 +89,10 @@ public class General extends AppCompatActivity {
         FirebaseUser user = mAuth.getCurrentUser();
         //получаю уникальные ключ данного пользователя (в данные момент это не используется)
         userID = user.getUid();
+
+        //notifications
+        //apiService = Client.getClient("https://fcm.googleapis.com/").create(APIService.class);
+        //notify = false;
 
         seenMessage(userID, userID_receiver);
         //слушатель изменений в базе данных
@@ -136,7 +142,7 @@ public class General extends AppCompatActivity {
         imageButtonMessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                notify = true;
                 //записываю написанное в тексте в переменнюу
                 String message = editTextMessage.getText().toString();
                 //если введенные текст пустой или больше разрешённого посылаю пользователя

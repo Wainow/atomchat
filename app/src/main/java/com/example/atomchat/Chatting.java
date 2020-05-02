@@ -25,6 +25,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+//import com.example.atomchat.Notifications.Token;
+
 public class Chatting extends AppCompatActivity {
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
