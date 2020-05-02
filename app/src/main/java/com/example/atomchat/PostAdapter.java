@@ -45,6 +45,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             holder.post_image.getBackground().setColorFilter(new LightingColorFilter(Color.parseColor(userColor(post.getAuthor())), Color.parseColor(userColor(post.getAuthor()))));
         } else{
             Glide.with(inflater.getContext()).load(post.getImageURL()).into(holder.post_image);
+            holder.post_image.setClipToOutline(true);
         }
     }
 
