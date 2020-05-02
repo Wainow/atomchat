@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="100dp">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="8dp"
         android:background="@drawable/username_background">
+
         <ImageView
             android:layout_width="75dp"
             android:layout_height="75dp"
             android:layout_marginTop="6dp"
             android:id="@+id/post_image"
-            android:padding="50dp"
+            android:padding="0dp"
             android:scaleType="centerCrop"
-            android:background="@drawable/ic_post_image"/>
+            android:background="@drawable/ic_post_image" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -35,8 +38,8 @@
             android:layout_toRightOf="@id/username_post"
             android:layout_toEndOf="@id/username_post"
             android:padding="2dp"
-            android:layout_marginTop="6dp"
-            android:textSize="15sp"/>
+            android:layout_marginTop="9dp"
+            android:textSize="12sp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

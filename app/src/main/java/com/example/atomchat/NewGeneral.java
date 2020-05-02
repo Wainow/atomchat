@@ -167,7 +167,7 @@ public class NewGeneral extends AppCompatActivity {
             }
         });
 
-        checkNewMessages();
+        //checkNewMessages();
     }
 
     @Override
