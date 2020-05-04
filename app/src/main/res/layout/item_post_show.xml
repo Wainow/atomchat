@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="5dp"
+    android:id="@+id/linear_background">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorBetween"
+        android:id="@+id/relative_for_post">
+        <com.makeramen.roundedimageview.RoundedImageView
+            app:riv_corner_radius="8dip"
+            android:layout_below="@id/text_post_show"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/post_image_show"
+            android:padding="0dp"
+            android:scaleType="centerCrop"
+            android:layout_marginLeft="13dp"
+            android:background="@drawable/ic_post_image"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="#FFFFFF"
+            android:textColor="#123FFF"
+            android:id="@+id/username_post_show"
+            android:layout_marginLeft="5dp"
+            android:padding="8dp"
+            android:textSize="14sp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="12:59 AM"
+            android:textColor="#808080"
+            android:id="@+id/data_post_show"
+            android:layout_toRightOf="@id/username_post_show"
+            android:layout_toEndOf="@id/username_post_show"
+            android:padding="0dp"
+            android:layout_marginTop="10dp"
+            android:textSize="12sp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/text_post_show"
+            android:text="Hello everyone! This is a simple example of text post. Please be peaceful and make love!!! Hello everyone! This is a simple example of text post. Please be peaceful and make love!!! "
+            android:textColor="#FFFFFF"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="5dp"
+            android:padding="8dp"
+            android:textSize="16sp"/>
+    </RelativeLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/text_post_answers"
+        android:layout_marginTop="5dp"
+        android:text="Answers"
+        android:textColor="#FFFFFF"
+        android:textStyle="italic"
+        android:layout_below="@id/post_image_show"
+        android:background="@drawable/answers_text_background"
+        android:gravity="center"
+        android:layout_gravity="center" />
+</LinearLayout>

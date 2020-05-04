@@ -1,6 +1,7 @@
 package com.example.atomchat;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.LightingColorFilter;
 import android.view.LayoutInflater;
@@ -36,7 +37,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        Post post = posts.get(position);
+        final Post post = posts.get(position);
         holder.username_post.setText(userColor(post.getAuthor()));
         holder.username_post.setTextColor(Color.parseColor(userColor(post.getAuthor())));
         holder.text_post.setText(post.getText() + "...");
@@ -47,6 +48,19 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             Glide.with(inflater.getContext()).load(post.getImageURL()).into(holder.post_image);
             holder.post_image.setClipToOutline(true);
         }
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(inflater.getContext(), PostShow.class);
+                intent.putExtra("getImageURL", post.getImageURL());
+                intent.putExtra("getDate", post.getDate());
+                intent.putExtra("getText", post.getText());
+                intent.putExtra("getAuthor", userColor(post.getAuthor()));
+                intent.putExtra("getKey", post.getKey());
+                inflater.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override

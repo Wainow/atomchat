@@ -25,20 +25,14 @@
             android:background="@mipmap/ic_launcher_foreground3" />
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="468dp"
-                android:layout_marginTop="58dp"
-                android:id="@+id/list_of_messages"/>
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentBottom="true">
-
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/list_of_messages"
+                android:layout_marginTop="55dp"
+                android:layout_above="@id/edit_text_message"/>
             <EditText
                 android:id="@+id/edit_text_message"
                 android:layout_width="match_parent"

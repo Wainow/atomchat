@@ -92,8 +92,9 @@ public class Forum extends AppCompatActivity {
                 String data = dataSnapshot.child("data").getValue().toString();
                 String text = dataSnapshot.child("text").getValue().toString();
                 String imageURL = dataSnapshot.child("imageURL").getValue().toString();
+                String key = dataSnapshot.child("key").getValue().toString();
 
-                Post post = new Post(author, data, text, imageURL);
+                Post post = new Post(author, data, text, imageURL, key);
                 list_posts.add(post);
                 //говорю адаптеру что нужно обновиться
                 postAdapter.notifyDataSetChanged();
@@ -162,8 +163,9 @@ public class Forum extends AppCompatActivity {
         hashMap.put("text", text);
         hashMap.put("data", data);
         hashMap.put("imageURL", imageURL);
-
-        myRef.push().setValue(hashMap);
+        String key = myRef.push().getKey();
+        hashMap.put("key", key);
+        myRef.child(key).setValue(hashMap);
         this.imageURL = "none";
     }
 

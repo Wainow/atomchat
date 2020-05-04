@@ -5,6 +5,7 @@ public class Post {
     private String Date;
     private String Text;
     private String ImageURL;
+    private String key;
 
     public String getImageURL() {
         return ImageURL;
@@ -38,10 +39,19 @@ public class Post {
         Text = text;
     }
 
-    public Post(String author, String date, String text, String ImageURL) {
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public Post(String author, String date, String text, String ImageURL, String key) {
         this.Author = author;
         this.Date = date;
         this.Text = text;
         this.ImageURL = ImageURL;
+        this.key = key;
     }
 }

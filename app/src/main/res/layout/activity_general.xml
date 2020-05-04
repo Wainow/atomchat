@@ -57,22 +57,12 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="100dp"
         android:background="@mipmap/ic_launcher_foreground3" />
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="630dp"
-        android:layout_marginTop="57dp">
-
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
-            android:layout_height="470dp"
-            android:id="@+id/list_of_messages"/>
-    </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_alignParentBottom="true">
-
+            android:id="@+id/list_of_messages"
+            android:layout_above="@id/edit_text_message"
+            android:layout_marginTop="55dp"/>
             <EditText
                 android:id="@+id/edit_text_message"
                 android:layout_width="match_parent"
@@ -84,7 +74,6 @@
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
                 android:textColor="#FFFFFF"/>
-
             <ImageButton android:id="@+id/send_message_btn"
                 android:background="@drawable/ic_snd_message2"
                 android:layout_width="25dp"
@@ -94,5 +83,4 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentBottom="true"
                 android:layout_marginRight="9dp" />
-        </RelativeLayout>
 </RelativeLayout>
