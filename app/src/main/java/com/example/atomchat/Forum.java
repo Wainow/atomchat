@@ -125,7 +125,7 @@ public class Forum extends AppCompatActivity {
     public void post_onClick(View view) {
         LayoutInflater li = LayoutInflater.from(this);
         View promptsView = li.inflate(R.layout.post_dialog, null);
-        AlertDialog.Builder mDialogBuilder = new AlertDialog.Builder(this);
+        AlertDialog.Builder mDialogBuilder = new AlertDialog.Builder(this, android.R.style.Theme_DeviceDefault_Dialog_NoActionBar);
         mDialogBuilder.setView(promptsView);
         final EditText userInput = (EditText) promptsView.findViewById(R.id.edit_text_post);
         final ImageButton addImage = (ImageButton) promptsView.findViewById(R.id.add_image_button);
@@ -222,7 +222,7 @@ public class Forum extends AppCompatActivity {
                         //HashMap<String, Object> map = new HashMap<>();
                         //map.put("imageURL", mUri);
                         //myRef.updateChildren(map);
-
+                        Toast.makeText(getApplicationContext(), "Image successfully uploaded", Toast.LENGTH_SHORT).show();
                         pd.dismiss();
                     } else{
                         pd.dismiss();

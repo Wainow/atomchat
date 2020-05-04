@@ -10,12 +10,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorBetween"
-        android:id="@+id/relative_for_post">
+        android:id="@+id/relative_for_post"
+        android:paddingBottom="10dp">
         <com.makeramen.roundedimageview.RoundedImageView
             app:riv_corner_radius="8dip"
             android:layout_below="@id/text_post_show"
             android:layout_width="wrap_content"
+            android:maxWidth="385dp"
             android:layout_height="wrap_content"
+            android:maxHeight="285dp"
             android:id="@+id/post_image_show"
             android:padding="0dp"
             android:scaleType="centerCrop"

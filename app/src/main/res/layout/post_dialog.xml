@@ -5,24 +5,37 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    android:padding="10dp" >
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_menu_forum"
-        android:id="@+id/add_image_button"
-        android:onClick="add_onClick"/>
+    android:padding="10dp">
     <TextView
         android:id="@+id/tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Напишите текст: "
+        android:text="Write your post"
+        android:textColor="#81ccc5"
         android:textAppearance="?android:attr/textAppearanceLarge" />
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
     <EditText
         android:id="@+id/edit_text_post"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-        <requestFocus />
-    </EditText>
-
+        android:layout_height="wrap_content"
+        android:textColor="#81ccc5"/>
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/add"
+        android:layout_alignParentRight="true"
+        android:id="@+id/add_image_button"
+        android:onClick="add_onClick"
+        android:background="#404040"
+        android:visibility="visible"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/done"
+            android:visibility="gone"
+            android:id="@+id/done_image"/>
+    </RelativeLayout>
 </LinearLayout>
