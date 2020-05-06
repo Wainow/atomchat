@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Write your post"
-        android:textColor="#81ccc5"
+        android:textColor="#c490ff"
         android:textAppearance="?android:attr/textAppearanceLarge" />
     <RelativeLayout
         android:layout_width="wrap_content"

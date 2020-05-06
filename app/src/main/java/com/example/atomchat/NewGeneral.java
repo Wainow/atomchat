@@ -1,10 +1,17 @@
 package com.example.atomchat;
 
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -56,6 +63,13 @@ public class NewGeneral extends AppCompatActivity {
     private static final int NOTIFY_ID = 101;
     private static String CHANNEL_ID = "Message channel";
 
+    //header items
+    private NavigationView navigationView;
+    private View headView;
+    private ImageView imageView;
+    private TextView textView;
+    private TextView username_textView;
+
 
 
     @Override
@@ -64,6 +78,7 @@ public class NewGeneral extends AppCompatActivity {
         setContentView(R.layout.activity_new_general);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        setHeader();
         /*
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -87,7 +102,7 @@ public class NewGeneral extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-        toolbar.setTitle("#Swjat");
+        toolbar.setTitle("Swjat");
         //как и раньше: связываю существующие на окне окна для ввода текста с переменными
         editTextMessage = findViewById(R.id.edit_text_message);
         list_of_messages = findViewById(R.id.list_of_messages);
@@ -178,6 +193,18 @@ public class NewGeneral extends AppCompatActivity {
     }
 
     @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.action_logout:
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(NewGeneral.this, MainActivity.class));
+                finish();
+                return true;
+        }
+        return false;
+    }
+
+    @Override
     public boolean onSupportNavigateUp() {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
@@ -230,5 +257,30 @@ public class NewGeneral extends AppCompatActivity {
         NotificationManagerCompat notificationManager =
                 NotificationManagerCompat.from(NewGeneral.this);
         notificationManager.notify(NOTIFY_ID, builder.build());
+    }
+
+    public void setHeader() {
+        navigationView = findViewById(R.id.nav_view);
+        View headView = navigationView.getHeaderView(0);
+        User user = new User();
+        imageView = (ImageView) headView.findViewById(R.id.imageView);
+        textView = headView.findViewById(R.id.textView);
+        username_textView = headView.findViewById(R.id.username_textView);
+
+        imageView.setColorFilter(Color.parseColor(user.userColor(FirebaseAuth.getInstance().getUid())));
+        username_textView.setText(user.userColor(FirebaseAuth.getInstance().getUid()));
+        //username_textView.setTextColor(Color.parseColor(user.userColor(FirebaseAuth.getInstance().getUid())));
+        textView.setText(FirebaseAuth.getInstance().getCurrentUser().getEmail());
+
+        Menu menu = navigationView.getMenu();
+        MenuItem fire = menu.findItem(R.id.nav_forum);
+        Drawable newIcon = (Drawable)fire.getIcon();
+        newIcon.mutate().setColorFilter(Color.argb(255, 200, 200, 200), PorterDuff.Mode.SRC_IN);
+        fire.setIcon(newIcon);
+        //MenuItem tools= menu.findItem(R.id.tools);
+        //SpannableString s = new SpannableString(tools.getTitle());
+        //s.setSpan(new TextAppearanceSpan(this, R.style.TextAppearance44), 0, s.length(), 0);
+        //tools.setTitle(s);
+        //navigationView.setNavigationItemSelectedListener(this);
     }
 }

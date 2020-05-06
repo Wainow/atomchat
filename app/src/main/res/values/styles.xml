@@ -28,4 +28,13 @@
         <item name="android:backgroundDimEnabled">false</item>
         <item name="android:background">@android:color/transparent</item>
     </style>
+
+    <style name="TextAppearance44">
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+
+    <style name="NavigationView">
+        <item name="android:listDivider">@color/colorReallyBlack</item>
+        <item name="android:textColorSecondary">@color/colorWhite</item>
+    </style>
 </resources>

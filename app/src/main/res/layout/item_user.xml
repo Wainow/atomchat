@@ -31,12 +31,21 @@
         android:layout_height="wrap_content"
         android:maxLines="1"
         android:id="@+id/last_message"
+        android:textColor="#d4d4d4"
         android:layout_toRightOf="@id/profile_image"
         android:layout_toEndOf="@id/profile_image"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="10dp"
         android:padding="8dp"
         android:textSize="14sp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:id="@+id/last_data"
+        android:padding="8dp"
+        android:textSize="12sp"
+        android:textColor="#808080"/>
     <de.hdodenhof.circleimageview.CircleImageView
         android:layout_width="15dp"
         android:layout_height="15dp"

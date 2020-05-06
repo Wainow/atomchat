@@ -72,5 +72,6 @@
         app:menu="@menu/activity_new_general_drawer"
         android:background="#0d0d0d"
         app:itemTextColor="#FFFFFF"
+        android:theme="@style/NavigationView"
         app:itemIconTint="#c490ff"/>
 </androidx.drawerlayout.widget.DrawerLayout>

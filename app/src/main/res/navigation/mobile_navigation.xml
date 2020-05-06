@@ -22,4 +22,9 @@
         android:name="com.example.atomchat.Chatting"
         android:label="@string/menu_chatting"
         tools:layout="@layout/activity_chatting" />
+    <activity
+        android:id="@+id/nav_settings"
+        android:name="com.example.atomchat.Settings"
+        android:label="@string/menu_settings"
+        tools:layout="@layout/activity_settings"/>
 </navigation>

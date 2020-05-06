@@ -17,10 +17,16 @@
             android:icon="@drawable/ic_menu_chatting"
             android:title="@string/menu_chatting" />
     </group>
-
-    <item android:title="Communicate">
-        <menu>
-        </menu>
-    </item>
-
+    <group
+        android:checkableBehavior="single"
+    android:id="@+id/group1">
+            <item
+                android:id="@+id/nav_settings"
+                android:icon="@drawable/power"
+                android:title="@string/menu_settings" />
+            <item
+                android:id="@+id/nav_who"
+                android:icon="@drawable/cake"
+                android:title="Who are we?" />
+    </group>
 </menu>

@@ -44,6 +44,7 @@ public class User {
         this.profile_color = userColor(id);
         this.status = status;
     }
+     public User(){}
 
     public String userColor(String id) {
 

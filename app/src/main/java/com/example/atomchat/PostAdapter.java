@@ -3,7 +3,6 @@ package com.example.atomchat;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.LightingColorFilter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
+
+import static android.view.View.GONE;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
@@ -43,7 +44,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         holder.text_post.setText(post.getText() + "...");
         holder.data_post.setText(post.getDate());
         if(post.getImageURL().equals("none")){
-            holder.post_image.getBackground().setColorFilter(new LightingColorFilter(Color.parseColor(userColor(post.getAuthor())), Color.parseColor(userColor(post.getAuthor()))));
+            //holder.post_image.getBackground().setColorFilter(new LightingColorFilter(Color.parseColor(userColor(post.getAuthor())), Color.parseColor(userColor(post.getAuthor()))));
+            holder.post_image.setVisibility(GONE);
         } else{
             Glide.with(inflater.getContext()).load(post.getImageURL()).into(holder.post_image);
             holder.post_image.setClipToOutline(true);

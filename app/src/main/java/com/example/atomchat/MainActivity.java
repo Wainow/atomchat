@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //говорю что activity main принадлежит именно этому коду
         setContentView(R.layout.activity_main);
         // Титульное название сверху 'Log in'
-        setTitle("Log in");
+        //setTitle("Log in");
 
         //Запускаю анимации при старте программы
         unitStart();
@@ -85,6 +85,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
         };
+
+        checkLog();
     }
 
     //слушатель нажатия на значок атома
@@ -125,5 +127,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void incognito_onClick(View view) {
         unitReg();
         singing("guest@mail.ru", "123123");
+    }
+
+    public void  checkLog(){
+        FirebaseUser user = mAuth.getCurrentUser();
+        if(user != null){
+            Intent intent = new Intent(MainActivity.this, NewGeneral.class);
+            startActivity(intent);
+            finish();
+        }
     }
 }
