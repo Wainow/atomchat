@@ -54,7 +54,7 @@ public class PostShowAdapter extends RecyclerView.Adapter<PostShowAdapter.ViewHo
             holder.linearLayout.getBackground().setColorFilter(new LightingColorFilter(Color.parseColor(userColor(chat.getAuthor())),Color.parseColor(userColor(chat.getAuthor()))));
         }
         if(chat.getImageURL() != null){
-            Glide.with(inflater.getContext()).load(chat.getImageURL()).into(holder.image);
+            Glide.with(inflater.getContext()).load(chat.getImageURL()).into(holder.image); //устанавливает необходимую картинку к конкретному посту
             holder.image.setClipToOutline(true);
         }
         if(position == 0){

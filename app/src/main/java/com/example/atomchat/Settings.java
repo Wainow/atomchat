@@ -17,12 +17,16 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.RequestConfiguration;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.gms.ads.reward.RewardItem;
 import com.google.android.gms.ads.reward.RewardedVideoAd;
 import com.google.android.gms.ads.reward.RewardedVideoAdListener;
 import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class Settings extends AppCompatActivity {
 
@@ -47,7 +51,14 @@ public class Settings extends AppCompatActivity {
         });
 
         MobileAds.initialize(getApplicationContext(),
-                "ca-app-pub-1601001617010023~1629615286");
+
+                getString(R.string.admob_app_id));
+
+        //Test ads
+        List<String> testDeviceIds = Arrays.asList("B3944D5B0EF6FDC11692FF7C728D71D2");
+        RequestConfiguration configuration =
+                new RequestConfiguration.Builder().setTestDeviceIds(testDeviceIds).build();
+        MobileAds.setRequestConfiguration(configuration);
 
         // Get reference to singleton RewardedVideoAd object
         mRewardedVideoAd = MobileAds.getRewardedVideoAdInstance(this);
@@ -92,6 +103,7 @@ public class Settings extends AppCompatActivity {
             public void onRewardedVideoAdFailedToLoad(int i) {
                 Toast.makeText(getBaseContext(),
                         "Ad failed to load.", Toast.LENGTH_SHORT).show();
+                //mRewardedVideoAd.loadAd(getString(R.string.ad_unit_id), new AdRequest.Builder().build());
             }
 
             @Override
@@ -100,8 +112,8 @@ public class Settings extends AppCompatActivity {
             }
 
         });
-
-        mRewardedVideoAd.loadAd("ca-app-pub-1601001617010023/6064518461", new AdRequest.Builder().build());
+        //Non Test Ads
+        mRewardedVideoAd.loadAd(getString(R.string.ad_unit_id), new AdRequest.Builder().build());
     }
 
     @Override
