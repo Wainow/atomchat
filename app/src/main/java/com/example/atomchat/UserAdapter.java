@@ -19,6 +19,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.util.ArrayList;
 
@@ -61,7 +62,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         inflater.getContext().startActivity(intent);
       }
     });
-    setLastMessage(user.getId(), holder.last_message, holder.last_data);
+    setLastMessage(user.getId(), holder.last_message, holder.last_data, holder.last_new);
 
     if(ischat){
       if(user.getStatus().equals("online")){
@@ -90,6 +91,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     private ImageView ic_online;
     private ImageView ic_offline;
     public TextView last_data;
+    private ImageView last_new;
 
 
     public ViewHolder(@NonNull View itemView) {
@@ -101,10 +103,11 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
       ic_online = itemView.findViewById(R.id.ic_online);
       ic_offline = itemView.findViewById(R.id.ic_offline);
       last_data = itemView.findViewById(R.id.last_data);
+      last_new = itemView.findViewById(R.id.last_new);
     }
   }
 
-  public void setLastMessage(final String userID_receiver, final TextView last_message, final TextView last_data){
+  public void setLastMessage(final String userID_receiver, final TextView last_message, final TextView last_data, final ImageView last_new){
     DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("chatting");
     final String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
@@ -122,7 +125,10 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         if(chat.getReceiver().equals(userID) && chat.getSender().equals(userID_receiver) || chat.getReceiver().equals(userID_receiver) && chat.getSender().equals(userID)) {
           last_message.setText(m);
           last_data.setText(d);
-          last_message.setTextColor(Color.parseColor(userColor(sender)));
+          //last_message.setTextColor(Color.parseColor(userColor(sender)));
+          if(chat.getIsseen().equals("false") && chat.getReceiver().equals(userID)){
+            last_new.setVisibility(View.VISIBLE);
+          }
         }
       }
 

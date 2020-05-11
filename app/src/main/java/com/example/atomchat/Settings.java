@@ -1,5 +1,6 @@
 package com.example.atomchat;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -113,7 +114,7 @@ public class Settings extends AppCompatActivity {
 
         });
         //Non Test Ads
-        mRewardedVideoAd.loadAd(getString(R.string.ad_unit_id), new AdRequest.Builder().build());
+        //mRewardedVideoAd.loadAd(getString(R.string.ad_unit_id), new AdRequest.Builder().build());
     }
 
     @Override
@@ -129,7 +130,7 @@ public class Settings extends AppCompatActivity {
 
     public void logout_onClick(View view) {
         LayoutInflater li = LayoutInflater.from(this);
-        View promptsView = li.inflate(R.layout.exit_dialog, null);
+        View promptsView = li.inflate(R.layout.exit_dialog, null); // диалоговое окно с уточнением выхода
         AlertDialog.Builder mDialogBuilder = new AlertDialog.Builder(this, android.R.style.Theme_DeviceDefault_Dialog_NoActionBar);
         mDialogBuilder.setView(promptsView);
         //Настраиваем сообщение в диалоговом окне:
@@ -139,7 +140,7 @@ public class Settings extends AppCompatActivity {
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog,int id) {
                                 //Вводим текст и отображаем в строке ввода на основном экране:
-                                FirebaseAuth.getInstance().signOut();
+                                FirebaseAuth.getInstance().signOut(); // метод для выхода
                                 startActivity(new Intent(Settings.this, MainActivity.class));
                                 finish();
 
@@ -173,9 +174,7 @@ public class Settings extends AppCompatActivity {
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog,int id) {
                                 //Вводим текст и отображаем в строке ввода на основном экране:
-                                if (mRewardedVideoAd.isLoaded()) {
-                                    mRewardedVideoAd.show();
-                                }
+                                createAccount();
                             }
                         })
                 .setNegativeButton("Cancel",
@@ -192,6 +191,56 @@ public class Settings extends AppCompatActivity {
         alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#0a0a0a")));
         alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.parseColor("#ff5252"));
         alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(Color.parseColor("#ff5252"));
+    }
+
+    private void createAccount() {
+        mRewardedVideoAd.loadAd(getString(R.string.ad_unit_id), new AdRequest.Builder().build());
+        final ProgressDialog pd = new ProgressDialog(this);
+        pd.setMessage("Uploading");
+        pd.show();
+        mRewardedVideoAd.setRewardedVideoAdListener(new RewardedVideoAdListener() {
+            @Override
+            public void onRewardedVideoAdLoaded() {
+                mRewardedVideoAd.show();
+                pd.dismiss();
+            }
+
+            @Override
+            public void onRewardedVideoAdOpened() {
+
+            }
+
+            @Override
+            public void onRewardedVideoStarted() {
+
+            }
+
+            @Override
+            public void onRewardedVideoAdClosed() {
+
+            }
+
+            @Override
+            public void onRewarded(RewardItem rewardItem) {
+
+            }
+
+            @Override
+            public void onRewardedVideoAdLeftApplication() {
+
+            }
+
+            @Override
+            public void onRewardedVideoAdFailedToLoad(int i) {
+
+            }
+
+            @Override
+            public void onRewardedVideoCompleted() {
+
+            }
+        });
+        //pd.dismiss();
     }
 
     @Override

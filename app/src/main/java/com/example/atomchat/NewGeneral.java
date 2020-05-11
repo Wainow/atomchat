@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,6 +28,9 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.atomchat.Notifications.Data;
+import com.example.atomchat.Notifications.MyResponse;
+import com.example.atomchat.Notifications.Sender;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -35,11 +39,17 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class NewGeneral extends AppCompatActivity {
 
@@ -118,6 +128,10 @@ public class NewGeneral extends AppCompatActivity {
         FirebaseUser user = mAuth.getCurrentUser();
         //получаю уникальные ключ данного пользователя (в данные момент это не используется)
         userID = user.getUid();
+
+        final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(NewGeneral.this);
+        linearLayoutManager.setStackFromEnd(true);
+        list_of_messages.setLayoutManager(linearLayoutManager);
 
         //слушатель изменений в базе данных
         myRef.addChildEventListener(new ChildEventListener() {

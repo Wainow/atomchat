@@ -8,6 +8,7 @@
     android:padding="8dp"
     android:background="@drawable/username_background">
     <ImageView
+        android:layout_marginTop="5dp"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:id="@+id/profile_image"
@@ -30,10 +31,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:maxLines="1"
+        android:text="Привет как дела что делаешь Привет как дела что делаешь Привет как дела что делаешь"
         android:id="@+id/last_message"
-        android:textColor="#d4d4d4"
+        android:textColor="#a8a7a7"
         android:layout_toRightOf="@id/profile_image"
         android:layout_toEndOf="@id/profile_image"
+        android:layout_toLeftOf="@id/last_new"
+        android:layout_toStartOf="@id/last_new"
         android:layout_marginTop="20dp"
         android:layout_marginLeft="10dp"
         android:padding="8dp"
@@ -46,6 +50,16 @@
         android:padding="8dp"
         android:textSize="12sp"
         android:textColor="#808080"/>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:id="@+id/last_new"
+        android:visibility="gone"
+        android:src="@drawable/text_new"
+        android:layout_marginTop="26dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/new_background"/>
     <de.hdodenhof.circleimageview.CircleImageView
         android:layout_width="15dp"
         android:layout_height="15dp"

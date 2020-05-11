@@ -71,6 +71,11 @@ public class Forum extends AppCompatActivity {
 
         storageReference = FirebaseStorage.getInstance().getReference("uploads");
 
+        final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(Forum.this);
+        linearLayoutManager.setReverseLayout(true);
+        linearLayoutManager.setStackFromEnd(true);
+        list_of_posts.setLayoutManager(linearLayoutManager);
+
         readPosts();
     }
 

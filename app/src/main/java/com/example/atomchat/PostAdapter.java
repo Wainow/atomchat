@@ -60,6 +60,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                 intent.putExtra("getText", post.getText());
                 intent.putExtra("getAuthor", userColor(post.getAuthor()));
                 intent.putExtra("getKey", post.getKey());
+                intent.putExtra("getAuthorID", post.getAuthor());
                 inflater.getContext().startActivity(intent);
             }
         });
