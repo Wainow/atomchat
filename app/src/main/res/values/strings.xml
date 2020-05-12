@@ -25,4 +25,5 @@
     <string name="admob_app_id">ca-app-pub-1601001617010023~1629615286</string>
     <string name="ad_unit_id">ca-app-pub-1601001617010023/6064518461</string>
     <string name="msg_token_fmt" translatable="false">InstanceID Token: %s</string>
+    <string name="title_activity_register">Register</string>
 </resources>

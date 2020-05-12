@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".Register"
+    tools:showIn="@layout/activity_register">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorAccent">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/text_new_account"
+            android:text="Create your new account"
+            android:textColor="#a8a7a7"
+            android:padding="10dp"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/text_new_account_1"
+            android:layout_below="@+id/text_new_account"
+            android:text="Create your new account"
+            android:textColor="#a8a7a7"
+            android:padding="7dp"
+            android:textSize="14sp"
+            android:textStyle="bold"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/text_new_account_2"
+            android:layout_below="@+id/text_new_account_1"
+            android:text="Create your new account"
+            android:textColor="#a8a7a7"
+            android:padding="5dp"
+            android:textSize="10sp"
+            android:textStyle="bold"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/text_new_account_3"
+            android:layout_below="@+id/text_new_account_2"
+            android:text="Create your new account"
+            android:textColor="#a8a7a7"
+            android:padding="3.5dp"
+            android:textSize="7sp"
+            android:textStyle="bold"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/text_new_account_4"
+            android:layout_below="@+id/text_new_account_3"
+            android:text="Create your new account"
+            android:textColor="#a8a7a7"
+            android:padding="2.45dp"
+            android:textSize="5sp"
+            android:textStyle="bold"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/text_new_account_5"
+            android:layout_below="@+id/text_new_account_4"
+            android:text="Create your new account"
+            android:textColor="#a8a7a7"
+            android:padding="1.715dp"
+            android:textSize="3.5sp"
+            android:textStyle="bold"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/text_new_account_6"
+            android:layout_below="@+id/text_new_account_5"
+            android:text="Create your new account"
+            android:textColor="#a8a7a7"
+            android:padding="1.2dp"
+            android:textSize="2.45sp"
+            android:textStyle="bold"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/text_new_account_7"
+            android:layout_below="@+id/text_new_account_6"
+            android:text="Create your new account"
+            android:textColor="#a8a7a7"
+            android:padding="0.84dp"
+            android:textSize="1.715sp"
+            android:textStyle="bold"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/text_new_account_8"
+            android:layout_below="@+id/text_new_account_7"
+            android:text="Create your new account"
+            android:textColor="#a8a7a7"
+            android:padding="0.588dp"
+            android:textSize="1.2sp"
+            android:textStyle="bold"/>
+        <EditText
+            android:id="@+id/edit_text_login_create"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="200dp"
+            android:background="@drawable/edit_text_background"
+            android:hint="email"
+            android:inputType="text"
+            android:maxLines="1"
+            android:paddingLeft="7dp"
+            android:paddingRight="7dp"
+            android:textSize="13sp" />
+
+        <EditText
+            android:id="@+id/edit_text_password_create"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:layout_below="@id/edit_text_login_create"
+            android:background="@drawable/edit_text_background"
+            android:hint="@string/edit_text_password"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:paddingLeft="7dp"
+            android:paddingRight="7dp"
+            android:textSize="13sp" />
+        <ImageButton
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:id="@+id/right_button_create"
+            android:layout_alignParentRight="true"
+            android:layout_margin="40dp"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/plus_button"
+            android:src="@drawable/done"
+            android:padding="15dp"
+            android:scaleType="centerCrop"
+            android:onClick="ok_onClick"/>
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

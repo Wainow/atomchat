@@ -109,7 +109,8 @@ public class Settings extends AppCompatActivity {
 
             @Override
             public void onRewardedVideoCompleted() {
-
+                Intent intent = new Intent(Settings.this, Register.class);
+                startActivity(intent);
             }
 
         });
@@ -237,7 +238,8 @@ public class Settings extends AppCompatActivity {
 
             @Override
             public void onRewardedVideoCompleted() {
-
+                Intent intent = new Intent(Settings.this, Register.class);
+                startActivity(intent);
             }
         });
         //pd.dismiss();

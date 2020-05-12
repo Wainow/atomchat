@@ -10,7 +10,7 @@
         android:id="@+id/tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Are you sure want to create new account?"
+        android:text="Are you sure want to create new account? It will cost you one video ad..."
         android:textColor="#ff5252"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 </LinearLayout>

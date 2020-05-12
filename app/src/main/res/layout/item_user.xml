@@ -31,7 +31,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:maxLines="1"
-        android:text="Привет как дела что делаешь Привет как дела что делаешь Привет как дела что делаешь"
+        android:text="HI!"
         android:id="@+id/last_message"
         android:textColor="#a8a7a7"
         android:layout_toRightOf="@id/profile_image"
